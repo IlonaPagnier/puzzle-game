@@ -1,0 +1,11 @@
+{
+  "name": "puzzle-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client\\index.js",
+  "scripts": {
+    "test": "node client\\index.js"
+  },
+  "author": "ape-ipa",
+  "license": "ISC"
+}
