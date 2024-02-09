@@ -19,7 +19,7 @@ let pieceList={ //liste des pieces existantes
     bleu: [[1,0,0],[1,1,1]]
 };
 
-//TODO creer une fonction reverse ET rotate pour les pieces de l'utilisateur
+
 
 function showPuzzle(puzzle){
     for(l of puzzle.mat){
@@ -89,9 +89,24 @@ function fillPuzzle(puzzle,indexPiece,posx,posy, rotation, reverse) {
     - rotation : nombre de rotation que la piece effectue (0 à 3)
     - reverse : est-ce que la pièce fait un reverse (0 ou 1)
 */
+    let pieceAPoser;
+    let monPuzzle=[   //matrice representant la carte
+    [0,0,0,0,0,0],
+    [0,0,0,0,0,0],
+    [0,0,0,0,0,0],
+    [0,0,0,0,0,0],
+    [0,0,0,0,0,0],
+    [0,0,0,0,0,0]
+        ];
+    // La on a une matrice vide ducoup
 
     // Recréation de la matrice de la pièce
-
+    if(reverse==1){
+        pieceAPoser=reversePiece(indexPiece);
+    }
+    if(rotation>0){
+        for
+        pieceAPoser=
 
     // verifier les bords
 
