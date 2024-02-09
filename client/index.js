@@ -90,7 +90,8 @@ function fillPuzzle(puzzle,indexPiece,posx,posy, rotation, reverse) {
     - reverse : est-ce que la pièce fait un reverse (0 ou 1)
 */
     let pieceAPoser;
-    let monPuzzle=[   //matrice representant la carte
+    //matrice representant la carte
+    let monPuzzle=[   
     [0,0,0,0,0,0],
     [0,0,0,0,0,0],
     [0,0,0,0,0,0],
@@ -99,17 +100,26 @@ function fillPuzzle(puzzle,indexPiece,posx,posy, rotation, reverse) {
     [0,0,0,0,0,0]
         ];
     // La on a une matrice vide ducoup
-
     // Recréation de la matrice de la pièce
     if(reverse==1){
         pieceAPoser=reversePiece(indexPiece);
     }
+
     if(rotation>0){
-        for
-        pieceAPoser=
-
+        for(i=0;i<rotation;i++){
+        pieceAPoser=rotatePiece(indexPiece)
+        }
+    }
     // verifier les bords
+    let rowsPiece = indexPiece.length; // Nombre de lignes
+    let colsPiece = indexPiece[0].length; // Nombre de colonnes de la première ligne
 
+    if (((posy+rowsPiece)>6)||((posx+colsPiece)>6)){
+
+    }
+    else {
+
+    }
 
     // Boucles for pour vérifier si la pièce peut être posée
 }
