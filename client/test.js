@@ -1,11 +1,11 @@
 // Puzzle en cours
 let puzzle={
 	mat: [   // matrice representant la carte
-		[1,1,1,2,1,1],
-		[1,0,1,2,2,1],
+		[1,1,1,0,1,1],
+		[1,0,1,0,0,1],
 		[1,0,0,0,0,1],
-		[1,0,0,0,0,1],
-		[1,1,0,0,1,1],
+		[1,0,2,0,0,1],
+		[1,1,2,2,1,1],
 		[1,1,1,1,1,1]
 	],
 	cat:"",     // categorie de la carte de l'user
@@ -66,10 +66,10 @@ process.stdin.on('data', (chunk) => {
 			if(posX > 0) posX --; // On décale la pièce à gauche
 			break;
 		case "s":
-			if(posY + pieceList[select].length < puzzle.mat.length) posY ++; // On descend de 1
+			if(posY + selectedPiece.length < puzzle.mat.length) posY ++; // On descend de 1
 			break;
 		case "d":
-			if(posX + pieceList[select][0].length < puzzle.mat[0].length) posX ++; // On décale à droite
+			if(posX + selectedPiece[0].length < puzzle.mat[0].length) posX ++; // On décale à droite
 			break;
 		case "r":
 			reverse = (reverse + 1)%2; // Reverse
@@ -114,7 +114,7 @@ Il faut appuyer sur ENTER à chaque fois.`;
 	printToConsole()
 });
 
-function rotatePiece(piece){ // sens horaire +90deg
+function rotatePiece(piece) { // sens horaire +90deg
 	let res=[];
 	for(i in piece[0]){
 		res.push([]);
