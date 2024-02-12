@@ -41,6 +41,7 @@ lastMsg = `  Z Q S D : Déplacer la pièce
   1 2 3 4 5 : Choisir une autre pièce
   R : Reverse
   T : Tourner
+  V : Poser la pièce
   exit : Quitter
 Il faut appuyer sur ENTER à chaque fois.`; // Message pour l'utilisateur
 selectedPiece = []; // Représentation de la pièce actuellement sélectionnée (à mettre à jour grace à updatePiece)
@@ -78,6 +79,9 @@ process.stdin.on('data', (chunk) => {
 			rotation = (rotation + 1)%4; // Rotation
 			updatePiece();
 			break;
+		case "v":
+			fillPuzzle(); // Poser la pièce
+			break;
 		case "1":
 		case "2":
 		case "3":
@@ -102,6 +106,7 @@ process.stdin.on('data', (chunk) => {
   1 2 3 4 5 : Choisir une autre pièce
   R : Reverse
   T : Tourner
+  V : Poser la pièce
   exit : Quitter
 Il faut appuyer sur ENTER à chaque fois.`;
 	}
@@ -197,3 +202,34 @@ function printToConsole() {
 	console.log(lastMsg);
 }
 
+function getNextId() {
+	for(i = 2; i < 36; i++) {
+		if(!puzzle.pieces[i]) return i;
+	}
+}
+
+function fillPuzzle() {
+    // Boucles for pour vérifier si la pièce peut être posée
+	let posable = true;
+	for(y in selectedPiece) {
+		for(x in selectedPiece[y]) {
+			if(selectedPiece[y][x] == 1) {
+				posable &= (puzzle.mat[posY*1 + y*1][posX*1 + x*1] == 0);
+			}
+		}
+	}
+	if(posable) {
+		let id = getNextId();
+		for(y in selectedPiece) {
+			for(x in selectedPiece[y]) {
+				if (selectedPiece[y][x] == 1) {
+					puzzle.mat[posY*1 + y*1][posX*1 + x*1] = id;
+				}
+			}
+		}
+		puzzle.pieces[id] = select;
+		return true;
+	} else {
+		return false;
+	}
+}
