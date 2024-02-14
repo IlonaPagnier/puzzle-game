@@ -194,9 +194,9 @@ function printToConsole() {
 	//  4X : couleur de fond
 	// process.stdout.write = console.log sans le retour à la ligne
 
-	console.log("\x1b[1;30m╔" + "═".repeat(28) + "╗\x1b[0m");
-	console.log("\x1b[1;30m║\x1b[0m" + " ".repeat(17) + "1 \x1b[42m  \x1b[0m" + " ".repeat(7) + "\x1b[1;30m║\x1b[0m");
-	console.log("\x1b[1;30m║" + " ".repeat(28) + "║\x1b[0m");
+	console.log("\x1b[1;30m╔" + "═".repeat(28) + "╗\x1b[0m");//première ligne
+	console.log("\x1b[1;30m║\x1b[0m" + " ".repeat(17) + "1 \x1b[42m  \x1b[0m" + " ".repeat(7) + "\x1b[1;30m║\x1b[0m");//deuxieme ligne
+	console.log("\x1b[1;30m║" + " ".repeat(28) + "║\x1b[0m");//3e ligne
 	console.log("\x1b[1;30m║\x1b[0m \x1b[37m" + "▄".repeat(14) + "\x1b[0m  2 \x1b[43m" + " ".repeat(6) + "\x1b[0m" + " ".repeat(3) + "\x1b[1;30m║\x1b[0m");
 	for(i = 0; i < puzzle.mat.length; i++) { // ligne
 		process.stdout.write("\x1b[1;30m║\x1b[0m \x1b[47m "); // début de la ligne
@@ -289,4 +289,63 @@ function refillDeck(deck,nbPieceRendues){
         deck.push(randomPiece);
     }
     
+}
+
+//défini les pièces encore utilisables
+function updateDeckUtilisable(deck,piecesPosees){
+	// Filtrer les éléments de tableau1 qui ne sont pas présents dans tableau2
+	let deckUtile = deck.filter(element => !piecesPosees.includes(element));
+	// Parcourir chaque élément du tableau resultat
+	for (let i = 0; i < deckUtile.length; i++) {
+    	console.log(deckUtile[i]);
+}
+return deckUtile;
+}
+
+function showPieceDeck(pieceOfDeck){
+	console.log("\x1b[1;30m║" + " ".repeat(12) + "║\x1b[0m");
+	switch(pieceOfDeck) { // Fin des lignes
+		case 1:
+			// afficher le 1 //
+			break;
+		case 2:
+			// afficher le 2 //
+			break;
+		case 3:
+			// afficher le 3 // console.log("\x1b[1;30m║" + "\x1b[44m" + " ".repeat(6) + "\x1b[0m" + " ".repeat(3) + "\x1b[1;30m║\x1b[0m");
+			break;
+		case 4:
+			// afficher le 4 //console.log("3 \x1b[45m" + " ".repeat(8) + "\x1b[0m" + " \x1b[1;30m║\x1b[0m");
+			break;
+		case 5:
+			console.log("\x1b[1;30m║" + "\x1b[0m  5 \x1b[44m  \x1b[0m" + " ".repeat(2) + "\x1b[1;30m║\x1b[0m");
+			console.log("\x1b[1;30m║" + " ".repeat(3) + "\x1b[44m" + " ".repeat(6) + "\x1b[0m" + " ".repeat(3) + "\x1b[1;30m║\x1b[0m");
+			break;
+		case "exit":
+			process.exit(0); // On termine le procgramme
+		default:
+			// commande invalide
+			lastMsg = `  cmd invalide:
+  Z Q S D : Déplacer la pièce
+  1 2 3 4 5 : Choisir une autre pièce
+  R : Reverse
+  T : Tourner
+  V : Poser la pièce
+  exit : Quitter
+Il faut appuyer sur ENTER à chaque fois.`;
+		
+	}
+}
+function showDeckUtilisable(deckUtile){
+	console.log("\x1b[1;30m╔" + "═".repeat(12) + "╗\x1b[0m");//première ligne
+
+	//affiche chaque pièce présente dans le utilisable
+	for (let i = 0; i < deckUtile.length; i++) {
+		showPieceDeck(deckUtile[i])
+	}
+
+
+	console.log("\x1b[1;30m║" + " ".repeat(3) + "\x1b[44m" + " ".repeat(6) + "\x1b[0m" + " ".repeat(3) + "\x1b[1;30m║\x1b[0m");
+	console.log("\x1b[1;30m║" + " ".repeat(12) + "║\x1b[0m");
+	console.log("\x1b[1;30m╚" + "═".repeat(12) + "╝\x1b[0m");
 }
