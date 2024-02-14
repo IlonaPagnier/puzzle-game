@@ -31,6 +31,14 @@ let couleurs = { // liste des pieces existantes
 	bleu: "4"
 };
 
+let deck=[];
+//On rempli initialement le deck avec 5 pieces
+for (let index = 0; index < 5; index++) {
+	let randomPiece = Math.floor(Math.random() * 5) + 1;
+	// Pousser le nombre aléatoire dans le tableau
+	deck.push(randomPiece);
+}
+
 // Variables
 select = "orange"; // Pièce actuellement sélectionnée
 rotation = 0; // Nombre de rotations
@@ -271,4 +279,14 @@ function fillPuzzle() {
 	} else {
 		return false;
 	}
+}
+
+function refillDeck(deck,nbPieceRendues){
+    
+    for (let index = 0; index < nbPieceRendues-1; index++) {
+        let randomPiece = Math.floor(Math.random() * 5) + 1;
+        // Pousser le nombre aléatoire dans le tableau
+        deck.push(randomPiece);
+    }
+    
 }
