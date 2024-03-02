@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Be Gentle</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<!-- Element pour les messages -->
+	<div id="message-box" style="display: none;">
+		<p id="message-text"></p>
+	</div>
+
+	<!-- Bloc Hors ligne -->
+	<div id="offline-block">
+		<form id="connect-form">
+			<label for="server-address">Adresse du serveur</label>
+			<input type="text" id="server-address" placeholder="Entrez l'adresse du serveur">
+			<button id="server-connect">Se Connecter</button>
+		</form>
+	</div>
+
+	<!-- Bloc Lobby -->
+	<div id="lobby-block" style="display: none;">
+		<div >
+			<!-- Première colonne -->
+			<div>
+				<h2>Créer une partie</h2>
+				<form id="create-game-form">
+					<label>Nombre de joueurs</br><input type="number" id="num-players" name="num-players" value="3" min="2" required></label>
+					<label>Nombre de tours<br><input type="number" id="num-turns" name="num-turns" value="4" min="1" required></label>
+					<label>Nombre de manches<br><input type="number" id="num-manche" name="num-manche" value="3" min="1" required></label>
+				</form>
+				<button type="button" id="create-game">Créer une partie</button>
+			</div>
+
+			<!-- Ligne séparatrice -->
+			<div></div>
+
+			<!-- Deuxième colonne -->
+			<div>
+				<h2>Rejoindre une partie</h2>
+				<form id="join-game-form">
+					<label>Code de la partie<br><input type="text" id="game-code" placeholder="Code de la partie" required></label>
+				</form>
+				<button type="button" id="join-game">Rejoindre une partie</button>
+			</div>
+		</div>
+
+		<button id="disconnect">Se Déconnecter</button>
+	</div>
+
+	<!-- Bloc Jeu -->
+	<div id="game-block" style="display: none;">
+		<div id="game-info">
+			<p>Code de la partie: <span id="game-code-display"></span></p>
+			<p>Vous êtes: <span id="player-name"></span></p>
+			<p>Statut de la partie: <span id="game-status"></span></p>
+			<p>Nombre de joueurs: <span id="nb-players"></span></p>
+			<p>Au tour du joueur: <span id="player-turn"></span></p>
+		</div>
+
+		<!-- Grille de jeu -->
+		<div id="game-board">
+			<!-- à compléter -->
+		</div>
+
+		<button id="return-home">Revenir à l'accueil</button>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

@@ -32,21 +32,20 @@ let couleurs = { // liste des pieces existantes
 };
 
 // Variables
-select = "orange"; // Pièce actuellement sélectionnée
-rotation = 0; // Nombre de rotations
-reverse = 0; // Nombre de reverse
-posX = 0; // Position X
-posY = 0; // Position Y
-lastMsg = `  Z Q S D : Déplacer la pièce
+let select = "orange"; // Pièce actuellement sélectionnée
+let rotation = 0; // Nombre de rotations
+let reverse = 0; // Nombre de reverse
+let posX = 0; // Position X
+let posY = 0; // Position Y
+let lastMsg = `  Z Q S D : Déplacer la pièce
   1 2 3 4 5 : Choisir une autre pièce
   R : Reverse
   T : Tourner
   V : Poser la pièce
   exit : Quitter
 Il faut appuyer sur ENTER à chaque fois.`; // Message pour l'utilisateur
-puzzleValide=`Puzzle incomplet.`;
-selectedPiece = []; // Représentation de la pièce actuellement sélectionnée (à mettre à jour grace à updatePiece)
-
+let puzzleValide = "Puzzle incomplet.";
+let selectedPiece = []; // Représentation de la pièce actuellement sélectionnée (à mettre à jour grace à updatePiece)
 
 // Initialisation
 updatePiece(); // initialisation du contenu de selectedPiece
@@ -64,7 +63,7 @@ process.stdin.on('data', (chunk) => {
   V : Poser la pièce
   exit : Quitter
 Il faut appuyer sur ENTER à chaque fois.`; // RaZ du message
-  puzzleValide=`Puzzle incomplet.`;
+
 
 	switch(input) {
 		case "z":
@@ -88,16 +87,11 @@ Il faut appuyer sur ENTER à chaque fois.`; // RaZ du message
 			updatePiece();
 			break;
 		case "v":
-
-			piecePosee = fillPuzzle(); 
-      // Poser la pièce et dire si c'est bon ou pas
-      if(piecePosee==true){
-        puzzleFini=isComplete();
-        if(puzzleFini==true){
-          puzzleValide=`Puzzle VALIDE.`;
-
-        }
-      }
+			piecePosee = fillPuzzle();
+			// Poser la pièce et dire si c'est bon ou pas
+			if(piecePosee){
+				puzzleValide = isComplete() ? "Puzzle VALIDE !" : "Puzzle incomplet.";
+			}
 			break;
 		case "1":
 		case "2":
@@ -134,12 +128,14 @@ Il faut appuyer sur ENTER à chaque fois.`;
 
 function rotatePiece(piece) { // sens horaire +90deg
 	let res=[];
+
 	for(i in piece[0]){
 		res.push([]);
 		for(j of piece){
 			res[i].unshift(j[i]);
 		}
 	}
+
 	return res;
 }
 
@@ -160,19 +156,15 @@ function updatePiece() {
 }
 
 function isComplete() {
-  let value=true;
-  // Parcourir chaque ligne
-for (var i = 0; i < puzzle.mat.length; i++) {
-  // Parcourir chaque élément dans la ligne
-  for (var j = 0; j < puzzle.mat[i].length; j++) {
-    //console.log(puzzle.mat[i][j]);
-    if(puzzle.mat[i][j]=='0'){
-      value= false;
-      
-    } // Afficher chaque élément
-  }
-}
-return value;
+	// Parcourir chaque ligne
+	for (var i = 0; i < puzzle.mat.length; i++) {
+		// Parcourir chaque élément dans la ligne
+		for (var j = 0; j < puzzle.mat[i].length; j++) {
+			//console.log(puzzle.mat[i][j]);
+			if(puzzle.mat[i][j]==0) return false;
+		}
+	}
+	return true;
 }
 
 function printToConsole() {
@@ -233,12 +225,9 @@ function printToConsole() {
 	console.log("\x1b[1;30m║" + " ".repeat(19) + "\x1b[44m" + " ".repeat(6) + "\x1b[0m" + " ".repeat(3) + "\x1b[1;30m║\x1b[0m");
 	console.log("\x1b[1;30m║" + " ".repeat(28) + "║\x1b[0m");
 	console.log("\x1b[1;30m╚" + "═".repeat(28) + "╝\x1b[0m");
-  
-	console.log(lastMsg);
-  console.log(puzzleValide);
-  
-  
 
+	console.log(lastMsg);
+	console.log(puzzleValide);
 }
 
 function getNextId() {
